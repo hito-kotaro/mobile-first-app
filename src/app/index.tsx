@@ -1,31 +1,36 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet,  View } from "react-native";
+import { MemoListItem } from "../components/MemoListItem";
+import { Header } from "../components/Header";
+import { CircleButton } from "../components/CircleButton";
+
+interface MemoList {
+  id: number;
+  title: string;
+  date: string;
+}
+
+const memoList: MemoList[] = [
+  { id: 1, title: "memo1", date: "2024/01/01" },
+  { id: 2, title: "memo2", date: "2024/01/01" },
+  { id: 3, title: "memo3", date: "2024/01/01" },
+  { id: 4, title: "memo4", date: "2024/01/01" },
+];
 
 const Index = () => {
   return (
     <View style={styles.container}>
       {/*ヘッダ部分*/}
-      <View>
-        <View>
-          <Text>Memo App</Text>
-          <Text>ログアウト</Text>
-        </View>
-      </View>
+			<Header/>
+
       {/*リスト部分*/}
       <View>
         {/*メモカード*/}
-        <View>
-          <View>
-            <Text>買い物リスト</Text>
-            <Text>2023/01/01</Text>
-          </View>
-          <View>
-            <Text>X</Text>
-          </View>
-        </View>
+        {memoList.map((m: MemoList) => {
+          return <MemoListItem key={m.id} title={m.title} date={m.date} />;
+        })}
       </View>
-      <View>
-        <Text>+</Text>
-      </View>
+
+			<CircleButton>＋</CircleButton>
     </View>
   );
 };
@@ -33,8 +38,7 @@ const Index = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#ffffff",
   },
 });
 
